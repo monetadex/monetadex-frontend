@@ -1,6 +1,6 @@
 import React, { lazy } from 'react'
 import { Router, Redirect, Route, Switch } from 'react-router-dom'
-import { ResetCSS } from '@pancakeswap/uikit'
+import { ResetCSS } from '@monetadex/uikit'
 import BigNumber from 'bignumber.js'
 import useEagerConnect from 'hooks/useEagerConnect'
 import { usePollBlockNumber } from 'state/block/hooks'
@@ -71,6 +71,7 @@ const App: React.FC = () => {
             <Route path="/" exact>
               <Home />
             </Route>
+            {/* 
             <Route exact path="/farms/auction">
               <FarmAuction />
             </Route>
@@ -113,7 +114,8 @@ const App: React.FC = () => {
             <Route path="/voting/proposal/:id">
               <Proposal />
             </Route>
-
+            */}
+            
             {/* Using this format because these components use routes injected props. We need to rework them with hooks */}
             <Route exact strict path="/swap" component={Swap} />
             <Route exact strict path="/swap/:outputCurrency" component={RedirectToSwap} />
@@ -131,6 +133,7 @@ const App: React.FC = () => {
             <Route exact strict path="/remove/:currencyIdA/:currencyIdB" component={RemoveLiquidity} />
 
             {/* Redirect */}
+            {/* 
             <Route path="/pool">
               <Redirect to="/liquidity" />
             </Route>
@@ -143,6 +146,7 @@ const App: React.FC = () => {
             <Route path="/nft">
               <Redirect to="/collectibles" />
             </Route>
+            */}
 
             {/* 404 */}
             <Route component={NotFound} />

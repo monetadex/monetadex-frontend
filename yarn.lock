@@ -2523,6 +2523,17 @@
   resolved "https://registry.yarnpkg.com/@microsoft/fetch-event-source/-/fetch-event-source-2.0.1.tgz#9ceecc94b49fbaa15666e38ae8587f64acce007d"
   integrity sha512-W6CLUJ2eBMw3Rec70qrsEW0jOm/3twwJv21mrmj2yORiaVmVYGS4sSS5yUwvQc1ZlDLYGPnClVWmUUMagKNsfA==
 
+"@monetadex/uikit@C:/Users/rub_f/Desktop/monetadex-toolkit/packages/monetadex-uikit":
+  version "0.49.1"
+  dependencies:
+    "@popperjs/core" "^2.9.2"
+    "@types/lodash" "^4.14.168"
+    "@types/styled-system" "^5.1.10"
+    lodash "^4.17.20"
+    react-popper "^2.2.5"
+    react-transition-group "^4.4.1"
+    styled-system "^5.1.5"
+
 "@multiformats/base-x@^4.0.1":
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/@multiformats/base-x/-/base-x-4.0.1.tgz#95ff0fa58711789d53aefb2590a8b7a4e715d121"
@@ -2602,19 +2613,6 @@
     tiny-invariant "^1.1.0"
     tiny-warning "^1.0.3"
     toformat "^2.0.0"
-
-"@pancakeswap/uikit@^0.49.1":
-  version "0.49.1"
-  resolved "https://registry.yarnpkg.com/@pancakeswap/uikit/-/uikit-0.49.1.tgz#35e43387de14e906b1ca553cd2de360d7f1665a9"
-  integrity sha512-OOMzHG4TcLZNUjKQbHv6mZtPHUqtydVasq37S+a6ytAwjbeWBmuACkC95s+s7IBX1bcCs7x0dojLQzgmeRbfgA==
-  dependencies:
-    "@popperjs/core" "^2.9.2"
-    "@types/lodash" "^4.14.168"
-    "@types/styled-system" "^5.1.10"
-    lodash "^4.17.20"
-    react-popper "^2.2.5"
-    react-transition-group "^4.4.1"
-    styled-system "^5.1.5"
 
 "@pmmmwh/react-refresh-webpack-plugin@0.4.3":
   version "0.4.3"
@@ -3731,9 +3729,9 @@
     "@types/node" "*"
 
 "@types/lodash@^4.14.168":
-  version "4.14.171"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.171.tgz#f01b3a5fe3499e34b622c362a46a609fdb23573b"
-  integrity sha512-7eQ2xYLLI/LsicL2nejW9Wyko3lcpN6O/z0ZLHrEQsg280zIdCv1t/0m6UtBjUHokCGBQ3gYTbHzDkZ1xOBwwg==
+  version "4.14.172"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.172.tgz#aad774c28e7bfd7a67de25408e03ee5a8c3d028a"
+  integrity sha512-/BHF5HAx3em7/KkzVKm3LrsD6HZAXuXO1AJZQ3cRRBZj4oHZDviWPYu0aEplAqDFNHZPW6d3G7KN+ONcCCC7pw==
 
 "@types/long@^4.0.0", "@types/long@^4.0.1":
   version "4.0.1"
@@ -3964,9 +3962,9 @@
     csstype "^3.0.2"
 
 "@types/styled-system@^5.1.10":
-  version "5.1.12"
-  resolved "https://registry.yarnpkg.com/@types/styled-system/-/styled-system-5.1.12.tgz#4f3ca8da3dffe3c5a6cc3b2a97f51b41464c104a"
-  integrity sha512-7x4BYKKfK9QewfsFC2x5r9BK/OrfX+JF/1P21jKPMHruawDw9gvG7bTZgTVk6YkzDO2JUlsk4i8hdiAepAhD0g==
+  version "5.1.13"
+  resolved "https://registry.yarnpkg.com/@types/styled-system/-/styled-system-5.1.13.tgz#9ad667534d3bd75720dd7778c94c783449cb5c14"
+  integrity sha512-RtpV6zXnnMQNcxKjC06BUM4MUER5o9uZ6b7xAc2OzhWxSsmQ3jXyW8ohuXdEJRKypEe0EqAzbSGx2Im0NXfdKA==
   dependencies:
     csstype "^3.0.2"
 

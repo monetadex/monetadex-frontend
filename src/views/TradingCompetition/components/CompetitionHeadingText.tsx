@@ -1,4 +1,4 @@
-import { Heading } from '@pancakeswap/uikit'
+import { Heading } from '@monetadex/uikit'
 import styled, { DefaultTheme } from 'styled-components'
 
 const H1SizeStyles = (theme: DefaultTheme) => `

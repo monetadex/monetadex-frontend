@@ -12,7 +12,7 @@ import {
   Link,
   CalculateIcon,
   IconButton,
-} from '@pancakeswap/uikit'
+} from '@monetadex/uikit'
 import { useTranslation } from 'contexts/Localization'
 import useTheme from 'hooks/useTheme'
 import useToast from 'hooks/useToast'
