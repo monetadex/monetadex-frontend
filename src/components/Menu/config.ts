@@ -8,37 +8,9 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
     href: '/',
   },
   {
-    label: t('Trade'),
+    label: t('Exchange'),
     icon: 'TradeIcon',
-    items: [
-      {
-        label: t('Exchange'),
-        href: '/swap',
-      },
-      {
-        label: t('Liquidity'),
-        href: '/pool',
-      },
-      {
-        label: t('LP Migration'),
-        href: 'https://v1exchange.pancakeswap.finance/#/migrate',
-      },
-    ],
-  },
-  {
-    label: t('Farms'),
-    icon: 'FarmIcon',
-    href: '/farms',
-  },
-  {
-    label: t('Pools'),
-    icon: 'PoolIcon',
-    href: '/pools',
-  },
-  {
-    label: t('IFO'),
-    icon: 'IfoIcon',
-    href: '/ifo',
+    href: '/swap',
   },
   {
     label: t('More'),
