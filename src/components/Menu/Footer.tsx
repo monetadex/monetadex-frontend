@@ -45,14 +45,6 @@ const Footer = () => {
             V1 (old)
           </ButtonMenuItem>
         </ButtonMenu>
-        <LinkExternal
-          href="https://www.binance.org/en/bridge?utm_source=PancakeSwap"
-          ml={[0, 0, '40px']}
-          mt={['20px', '20px', 0]}
-          mb={['8px', '8px', 0]}
-        >
-          {t('Convert ERC-20 to BEP-20')}
-        </LinkExternal>
       </Flex>
       <Flex
         flexGrow={1}
@@ -65,7 +57,7 @@ const Footer = () => {
             id="clickExchangeHelp"
             as="a"
             external
-            href="https://docs.pancakeswap.finance/products/pancakeswap-exchange"
+            href="https://monetadex.gitbook.io/monetadex"
             variant="subtle"
           >
             {t('Need help ?')}

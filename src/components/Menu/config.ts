@@ -18,7 +18,7 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
     items: [
       {
         label: t('Contact'),
-        href: 'https://docs.pancakeswap.finance/contact-us',
+        href: 'https://monetadex.gitbook.io/monetadex/contact-us',
       },
       {
         label: t('Github'),
