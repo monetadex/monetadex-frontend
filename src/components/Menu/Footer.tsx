@@ -38,14 +38,6 @@ const Footer = () => {
   const { t } = useTranslation()
   return (
     <Wrapper>
-      <Flex flexDirection={['column', 'column', 'row']} alignItems="center">
-        <ButtonMenu variant="subtle" scale="sm" activeIndex={0}>
-          <ButtonMenuItem>V2</ButtonMenuItem>
-          <ButtonMenuItem as="a" href="https://v1exchange.pancakeswap.finance/#/">
-            V1 (old)
-          </ButtonMenuItem>
-        </ButtonMenu>
-      </Flex>
       <Flex
         flexGrow={1}
         alignItems="center"
