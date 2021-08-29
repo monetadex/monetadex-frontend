@@ -3,6 +3,8 @@ import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { BscConnector } from '@binance-chain/bsc-connector'
 import { ConnectorNames } from '@monetadex/uikit'
 import { ethers } from 'ethers'
+import { LedgerConnector } from '@web3-react/ledger-connector'
+import { TrezorConnector } from '@web3-react/trezor-connector'
 import getNodeUrl from './getRpcUrl'
 
 const POLLING_INTERVAL = 12000
@@ -20,10 +22,22 @@ const walletconnect = new WalletConnectConnector({
 
 const bscConnector = new BscConnector({ supportedChainIds: [chainId] })
 
+const ledger = new LedgerConnector({ chainId: 1, url: rpcUrl, pollingInterval: POLLING_INTERVAL })
+
+const trezor = new TrezorConnector({
+  chainId: 1,
+  url: rpcUrl,
+  pollingInterval: POLLING_INTERVAL,
+  manifestEmail: 'dummy@abc.xyz',
+  manifestAppUrl: 'http://localhost:1234'
+})
+
 export const connectorsByName: { [connectorName in ConnectorNames]: any } = {
   [ConnectorNames.Injected]: injected,
   [ConnectorNames.WalletConnect]: walletconnect,
   [ConnectorNames.BSC]: bscConnector,
+  [ConnectorNames.Ledger]: ledger,
+  [ConnectorNames.Trezor]: trezor,
 }
 
 export const getLibrary = (provider): ethers.providers.Web3Provider => {
