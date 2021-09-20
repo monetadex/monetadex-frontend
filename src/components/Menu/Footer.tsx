@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ButtonMenu, ButtonMenuItem, LinkExternal, Flex, Svg, Image, Button } from '@monetadex/uikit'
+import { Flex, Svg, Image, Button } from '@monetadex/uikit'
 import { useTranslation } from 'contexts/Localization'
 
 const Wrapper = styled.div`
@@ -18,6 +18,7 @@ const Wrapper = styled.div`
 `
 
 const BubbleWrapper = styled(Flex)`
+  margin-top: 30px;
   svg {
     fill: ${({ theme }) => theme.colors.textSubtle};
     transition: background-color 0.2s, opacity 0.2s;
