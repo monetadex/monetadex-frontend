@@ -15,7 +15,6 @@ const injected = new InjectedConnector({ supportedChainIds: [chainId] })
 
 const walletconnect = new WalletConnectConnector({
   rpc: { [chainId]: rpcUrl },
-  bridge: 'https://pancakeswap.bridge.walletconnect.org/',
   qrcode: true,
   pollingInterval: POLLING_INTERVAL,
 })
@@ -28,8 +27,8 @@ const trezor = new TrezorConnector({
   chainId: 1,
   url: rpcUrl,
   pollingInterval: POLLING_INTERVAL,
-  manifestEmail: 'dummy@abc.xyz',
-  manifestAppUrl: 'http://localhost:1234'
+  manifestEmail: '...',
+  manifestAppUrl: '...'
 })
 
 export const connectorsByName: { [connectorName in ConnectorNames]: any } = {

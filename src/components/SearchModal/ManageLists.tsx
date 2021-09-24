@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { TokenList, Version } from '@uniswap/token-lists'
 import Card from 'components/Card'
-import { UNSUPPORTED_LIST_URLS } from 'config/constants/lists'
 import { parseENSAddress } from 'utils/ENS/parseENSAddress'
 import { useTranslation } from 'contexts/Localization'
+import { getUnsupportedListUrls } from 'config/constants/lists'
 import useFetchListCallback from '../../hooks/useFetchListCallback'
 
 import { AppDispatch, AppState } from '../../state'
@@ -171,7 +171,7 @@ function ManageLists({
     return listUrls
       .filter((listUrl) => {
         // only show loaded lists, hide unsupported lists
-        return Boolean(lists[listUrl].current) && !UNSUPPORTED_LIST_URLS.includes(listUrl)
+        return Boolean(lists[listUrl].current) && !getUnsupportedListUrls().includes(listUrl)
       })
       .sort((u1, u2) => {
         const { current: l1 } = lists[u1]

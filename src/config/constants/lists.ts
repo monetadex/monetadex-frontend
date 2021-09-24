@@ -1,14 +1,20 @@
-const PANCAKE_EXTENDED = 'https://tokens.pancakeswap.finance/pancakeswap-extended.json'
-const PANCAKE_TOP100 = 'https://tokens.pancakeswap.finance/pancakeswap-top-100.json'
+const MONETADEX_EXTENDED = 'https://api.1inch.exchange/v3.0/{CHAIN_ID}/tokens'
 
-export const UNSUPPORTED_LIST_URLS: string[] = []
+const CHAIN_ID_PLACEHOLDER = '{CHAIN_ID}'
 
-// lower index == higher priority for token import
-export const DEFAULT_LIST_OF_LISTS: string[] = [
-  PANCAKE_TOP100,
-  PANCAKE_EXTENDED,
-  ...UNSUPPORTED_LIST_URLS, // need to load unsupported tokens as well
-]
+export function getDefaultListOfLists(): string[] {
+  const chainId = 56;
+  return [
+    MONETADEX_EXTENDED.replace(CHAIN_ID_PLACEHOLDER, chainId.toString()),
+    ...getUnsupportedListUrls(), // need to load unsupported tokens as well
+  ]
+}
+
+export function getUnsupportedListUrls(): string[] {
+  return []
+}
 
 // default lists to be 'active' aka searched across
-export const DEFAULT_ACTIVE_LIST_URLS: string[] = []
+export function getDefaultActiveListUrls(): string[] {
+  return []
+}

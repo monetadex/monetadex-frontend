@@ -2,7 +2,7 @@ import { createReducer } from '@reduxjs/toolkit'
 import { getVersionUpgrade, VersionUpgrade } from '@uniswap/token-lists'
 // eslint-disable-next-line import/no-unresolved
 import { TokenList } from '@uniswap/token-lists/dist/types'
-import { DEFAULT_ACTIVE_LIST_URLS, UNSUPPORTED_LIST_URLS, DEFAULT_LIST_OF_LISTS } from '../../config/constants/lists'
+import { getDefaultActiveListUrls, getDefaultListOfLists, getUnsupportedListUrls } from '../../config/constants/lists'
 
 import { updateVersion } from '../global/actions'
 import { acceptListUpdate, addList, fetchTokenList, removeList, enableList, disableList } from './actions'
@@ -35,14 +35,14 @@ const NEW_LIST_STATE: ListState = {
 type Mutable<T> = { -readonly [P in keyof T]: T[P] extends ReadonlyArray<infer U> ? U[] : T[P] }
 
 const initialState: ListsState = {
-  lastInitializedDefaultListOfLists: DEFAULT_LIST_OF_LISTS,
+  lastInitializedDefaultListOfLists: getDefaultListOfLists(),
   byUrl: {
-    ...DEFAULT_LIST_OF_LISTS.concat(...UNSUPPORTED_LIST_URLS).reduce<Mutable<ListsState['byUrl']>>((memo, listUrl) => {
+    ...getDefaultListOfLists().concat(...getUnsupportedListUrls()).reduce<Mutable<ListsState['byUrl']>>((memo, listUrl) => {
       memo[listUrl] = NEW_LIST_STATE
       return memo
     }, {}),
   },
-  activeListUrls: DEFAULT_ACTIVE_LIST_URLS,
+  activeListUrls: getDefaultActiveListUrls(),
 }
 
 export default createReducer(initialState, (builder) =>
@@ -76,7 +76,7 @@ export default createReducer(initialState, (builder) =>
         }
       } else {
         // activate if on default active
-        if (DEFAULT_ACTIVE_LIST_URLS.includes(url)) {
+        if (getDefaultActiveListUrls().includes(url)) {
           state.activeListUrls?.push(url)
         }
 
@@ -155,9 +155,9 @@ export default createReducer(initialState, (builder) =>
           (s, l) => s.add(l),
           new Set(),
         )
-        const newListOfListsSet = DEFAULT_LIST_OF_LISTS.reduce<Set<string>>((s, l) => s.add(l), new Set())
+        const newListOfListsSet = getDefaultListOfLists().reduce<Set<string>>((s, l) => s.add(l), new Set())
 
-        DEFAULT_LIST_OF_LISTS.forEach((listUrl) => {
+        getDefaultListOfLists().forEach((listUrl) => {
           if (!lastInitializedSet.has(listUrl)) {
             state.byUrl[listUrl] = NEW_LIST_STATE
           }
@@ -170,14 +170,14 @@ export default createReducer(initialState, (builder) =>
         })
       }
 
-      state.lastInitializedDefaultListOfLists = DEFAULT_LIST_OF_LISTS
+      state.lastInitializedDefaultListOfLists = getDefaultListOfLists()
 
       // if no active lists, activate defaults
       if (!state.activeListUrls) {
-        state.activeListUrls = DEFAULT_ACTIVE_LIST_URLS
+        state.activeListUrls = getDefaultActiveListUrls()
 
         // for each list on default list, initialize if needed
-        DEFAULT_ACTIVE_LIST_URLS.map((listUrl: string) => {
+        getDefaultActiveListUrls().map((listUrl: string) => {
           if (!state.byUrl[listUrl]) {
             state.byUrl[listUrl] = NEW_LIST_STATE
           }

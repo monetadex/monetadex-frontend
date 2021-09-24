@@ -2,10 +2,9 @@ import { ChainId, Token } from '@pancakeswap/sdk'
 import { Tags, TokenInfo, TokenList } from '@uniswap/token-lists'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
-import { DEFAULT_LIST_OF_LISTS } from 'config/constants/lists'
+import { getDefaultListOfLists, getUnsupportedListUrls } from 'config/constants/lists'
 import { AppState } from '../index'
 import DEFAULT_TOKEN_LIST from '../../config/constants/tokenLists/pancake-default.tokenlist.json'
-import { UNSUPPORTED_LIST_URLS } from '../../config/constants/lists'
 import UNSUPPORTED_TOKEN_LIST from '../../config/constants/tokenLists/pancake-unsupported.tokenlist.json'
 
 type TagDetails = Tags[keyof Tags]
@@ -15,8 +14,8 @@ export interface TagInfo extends TagDetails {
 
 // use ordering of default list of lists to assign priority
 function sortByListPriority(urlA: string, urlB: string) {
-  const first = DEFAULT_LIST_OF_LISTS.includes(urlA) ? DEFAULT_LIST_OF_LISTS.indexOf(urlA) : Number.MAX_SAFE_INTEGER
-  const second = DEFAULT_LIST_OF_LISTS.includes(urlB) ? DEFAULT_LIST_OF_LISTS.indexOf(urlB) : Number.MAX_SAFE_INTEGER
+  const first = getDefaultListOfLists().includes(urlA) ? getDefaultListOfLists().indexOf(urlA) : Number.MAX_SAFE_INTEGER
+  const second = getDefaultListOfLists().includes(urlB) ? getDefaultListOfLists().indexOf(urlB) : Number.MAX_SAFE_INTEGER
 
   // need reverse order to make sure mapping includes top priority last
   if (first < second) return 1
@@ -138,14 +137,14 @@ function useCombinedTokenMapFromUrls(urls: string[] | undefined): TokenAddressMa
 // filter out unsupported lists
 export function useActiveListUrls(): string[] | undefined {
   return useSelector<AppState, AppState['lists']['activeListUrls']>((state) => state.lists.activeListUrls)?.filter(
-    (url) => !UNSUPPORTED_LIST_URLS.includes(url),
+    (url) => !getUnsupportedListUrls().includes(url),
   )
 }
 
 export function useInactiveListUrls(): string[] {
   const lists = useAllLists()
   const allActiveListUrls = useActiveListUrls()
-  return Object.keys(lists).filter((url) => !allActiveListUrls?.includes(url) && !UNSUPPORTED_LIST_URLS.includes(url))
+  return Object.keys(lists).filter((url) => !allActiveListUrls?.includes(url) && !getUnsupportedListUrls().includes(url))
 }
 
 // get all the tokens from active lists, combine with local default tokens
@@ -173,7 +172,7 @@ export function useUnsupportedTokenList(): TokenAddressMap {
   const localUnsupportedListMap = listToTokenMap(UNSUPPORTED_TOKEN_LIST)
 
   // get any loaded unsupported tokens
-  const loadedUnsupportedListMap = useCombinedTokenMapFromUrls(UNSUPPORTED_LIST_URLS)
+  const loadedUnsupportedListMap = useCombinedTokenMapFromUrls(getUnsupportedListUrls())
 
   // format into one token address map
   return combineMaps(localUnsupportedListMap, loadedUnsupportedListMap)
