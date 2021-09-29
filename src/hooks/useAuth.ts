@@ -9,8 +9,8 @@ import {
   UserRejectedRequestError as UserRejectedRequestErrorWalletConnect,
   WalletConnectConnector,
 } from '@web3-react/walletconnect-connector'
-import { ConnectorNames, connectorLocalStorageKey } from '@monetadex/uikit'
-import { connectorsByName } from 'utils/web3React'
+import { ConnectorNames, connectorLocalStorageKey, NetworkConfig } from '@monetadex/uikit'
+import { getConnectorsByNameAndNetwork } from 'utils/web3React'
 import { setupNetwork } from 'utils/wallet'
 import useToast from 'hooks/useToast'
 import { profileClear } from 'state/profile'
@@ -24,8 +24,8 @@ const useAuth = () => {
   const { toastError } = useToast()
 
   const login = useCallback(
-    (connectorID: ConnectorNames) => {
-      const connector = connectorsByName[connectorID]
+    (connectorID: ConnectorNames, networkConfig: NetworkConfig) => {
+      const connector = getConnectorsByNameAndNetwork(connectorID, networkConfig)
       if (connector) {
         activate(connector, async (error: Error) => {
           if (error instanceof UnsupportedChainIdError) {
@@ -63,8 +63,9 @@ const useAuth = () => {
     deactivate()
     // This localStorage key is set by @web3-react/walletconnect-connector
     if (window.localStorage.getItem('walletconnect')) {
-      connectorsByName.walletconnect.close()
-      connectorsByName.walletconnect.walletConnectProvider = null
+      // TODO this should be fixed
+      // connectorsByName.walletconnect.close()
+      // connectorsByName.walletconnect.walletConnectProvider = null
     }
   }, [deactivate, dispatch])
 

@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import {
   Flex,
   LogoutIcon,
+  NetworkConfig,
+  NetworkMenu,
   useModal,
   UserMenu as UIKitUserMenu,
   UserMenuDivider,
@@ -21,6 +23,9 @@ const UserMenu = () => {
   const { t } = useTranslation()
   const { account } = useWeb3React()
   const { logout } = useAuth()
+
+  const [networkConfig, setNetworkConfig] = useState({} as NetworkConfig);
+  
   const { balance, fetchStatus } = useGetBnbBalance()
   const { isInitialized, isLoading, profile } = useProfile()
   const [onPresentWalletModal] = useModal(<WalletModal initialView={WalletView.WALLET_INFO} />)
@@ -29,26 +34,39 @@ const UserMenu = () => {
   const avatarSrc = profile && profile.nft ? `/images/nfts/${profile.nft.images.sm}` : undefined
   const hasLowBnbBalance = fetchStatus === FetchStatus.SUCCESS && balance.lte(LOW_BNB_BALANCE)
 
+  const pickNetwork = (nc: NetworkConfig) => {
+    console.log(nc)
+    setNetworkConfig(nc);
+  }
+
   if (!account) {
-    return <ConnectWalletButton scale="sm" />
+    return (
+      <div>
+        <NetworkMenu pickNetwork={pickNetwork} />
+        <ConnectWalletButton networkConfig={networkConfig} scale="sm" />
+      </div>
+    )
   }
 
   return (
-    <UIKitUserMenu account={account} avatarSrc={avatarSrc}>
-      <WalletUserMenuItem hasLowBnbBalance={hasLowBnbBalance} onPresentWalletModal={onPresentWalletModal} />
-      <UserMenuItem as="button" onClick={onPresentTransactionModal}>
-        {t('Transactions')}
-      </UserMenuItem>
-      <UserMenuDivider />
-      <ProfileUserMenuItem isLoading={isLoading} hasProfile={hasProfile} />
-      <UserMenuDivider />
-      <UserMenuItem as="button" onClick={logout}>
-        <Flex alignItems="center" justifyContent="space-between" width="100%">
-          {t('Disconnect')}
-          <LogoutIcon />
-        </Flex>
-      </UserMenuItem>
-    </UIKitUserMenu>
+    <div>
+      <NetworkMenu pickNetwork={pickNetwork} />
+      <UIKitUserMenu account={account} avatarSrc={avatarSrc}>
+        <WalletUserMenuItem hasLowBnbBalance={hasLowBnbBalance} onPresentWalletModal={onPresentWalletModal} />
+        <UserMenuItem as="button" onClick={onPresentTransactionModal}>
+          {t('Transactions')}
+        </UserMenuItem>
+        <UserMenuDivider />
+        <ProfileUserMenuItem isLoading={isLoading} hasProfile={hasProfile} />
+        <UserMenuDivider />
+        <UserMenuItem as="button" onClick={logout}>
+          <Flex alignItems="center" justifyContent="space-between" width="100%">
+            {t('Disconnect')}
+            <LogoutIcon />
+          </Flex>
+        </UserMenuItem>
+      </UIKitUserMenu>
+    </div>
   )
 }
 

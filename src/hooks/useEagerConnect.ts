@@ -29,12 +29,14 @@ const useEagerConnect = () => {
       // Currently BSC extension doesn't always inject in time.
       // We must check to see if it exists, and if not, wait for it before proceeding.
       if (isConnectorBinanceChain && !isBinanceChainDefined) {
-        _binanceChainListener().then(() => login(connectorId))
-
-        return
+        // TODO: this should be fixed
+        // _binanceChainListener().then(() => login(connectorId))
+        
+        // return
       }
 
-      login(connectorId)
+      // TODO: this should be fixed
+      // login(connectorId)
     }
   }, [login])
 }

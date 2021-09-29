@@ -1,42 +1,34 @@
 import { InjectedConnector } from '@web3-react/injected-connector'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { BscConnector } from '@binance-chain/bsc-connector'
-import { ConnectorNames } from '@monetadex/uikit'
+import { ConnectorNames, NetworkConfig } from '@monetadex/uikit'
 import { ethers } from 'ethers'
 import { LedgerConnector } from '@web3-react/ledger-connector'
 import { TrezorConnector } from '@web3-react/trezor-connector'
-import getNodeUrl from './getRpcUrl'
+import { sample } from 'lodash'
 
 const POLLING_INTERVAL = 12000
-const rpcUrl = getNodeUrl()
-const chainId = parseInt(process.env.REACT_APP_CHAIN_ID, 10)
 
-const injected = new InjectedConnector({ supportedChainIds: [chainId] })
+const MANIFEST_EMAIL = "..."
+const MANIFEST_APP_URL = "..."
 
-const walletconnect = new WalletConnectConnector({
-  rpc: { [chainId]: rpcUrl },
-  qrcode: true,
-  pollingInterval: POLLING_INTERVAL,
-})
-
-const bscConnector = new BscConnector({ supportedChainIds: [chainId] })
-
-const ledger = new LedgerConnector({ chainId: 1, url: rpcUrl, pollingInterval: POLLING_INTERVAL })
-
-const trezor = new TrezorConnector({
-  chainId: 1,
-  url: rpcUrl,
-  pollingInterval: POLLING_INTERVAL,
-  manifestEmail: '...',
-  manifestAppUrl: '...'
-})
-
-export const connectorsByName: { [connectorName in ConnectorNames]: any } = {
-  [ConnectorNames.Injected]: injected,
-  [ConnectorNames.WalletConnect]: walletconnect,
-  [ConnectorNames.BSC]: bscConnector,
-  [ConnectorNames.Ledger]: ledger,
-  [ConnectorNames.Trezor]: trezor,
+export const getConnectorsByNameAndNetwork = (connectorName: ConnectorNames, network: NetworkConfig) => {
+  console.log(network);
+  console.log(parseInt(network.chainId, 10));
+  switch (connectorName) {
+    case ConnectorNames.Injected:
+      return new InjectedConnector({ supportedChainIds: [parseInt(network.chainId, 10)] })
+    case ConnectorNames.WalletConnect:
+      return new WalletConnectConnector({ rpc: { [parseInt(network.chainId, 10)]: sample(network.rpcUrl) }, qrcode: true, pollingInterval: POLLING_INTERVAL, })
+    case ConnectorNames.BSC:
+      return new BscConnector({ supportedChainIds: [parseInt(network.chainId, 10)] })
+    case ConnectorNames.Ledger:
+      return new LedgerConnector({ chainId: parseInt(network.chainId, 10), url: sample(network.rpcUrl), pollingInterval: POLLING_INTERVAL });
+    case ConnectorNames.Trezor:
+      return new TrezorConnector({ chainId: parseInt(network.chainId, 10), url: sample(network.rpcUrl), pollingInterval: POLLING_INTERVAL, manifestEmail: MANIFEST_EMAIL, manifestAppUrl: MANIFEST_APP_URL });
+    default:
+      throw new Error(`Not Expected`)
+  }
 }
 
 export const getLibrary = (provider): ethers.providers.Web3Provider => {
