@@ -13,8 +13,6 @@ const MANIFEST_EMAIL = "..."
 const MANIFEST_APP_URL = "..."
 
 export const getConnectorsByNameAndNetwork = (connectorName: ConnectorNames, network: NetworkConfig) => {
-  console.log(network);
-  console.log(parseInt(network.chainId, 10));
   switch (connectorName) {
     case ConnectorNames.Injected:
       return new InjectedConnector({ supportedChainIds: [parseInt(network.chainId, 10)] })

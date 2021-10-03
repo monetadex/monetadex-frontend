@@ -65,7 +65,7 @@ const BattleCta: React.FC<CompetitionProps> = ({
   const history = useHistory()
   const { t } = useTranslation()
   const { login, logout } = useAuth()
-  const { onPresentConnectModal } = useWalletModal(login, null, logout)
+  const { onPresentConnectModal } = useWalletModal(login, logout)
   const [onPresentRegisterModal] = useModal(
     <RegisterModal profile={profile} onRegisterSuccess={onRegisterSuccess} />,
     false,
