@@ -22,7 +22,7 @@ import ChartDisclaimer, { CHART_LOCAL_STORAGE_KEY } from './components/ChartDisc
 const Predictions = () => {
   const { isDesktop } = useMatchBreakpoints()
   const [hasAcceptedRisk, setHasAcceptedRisk] = usePersistState(false, {
-    localStorageKey: 'pancake_predictions_accepted_risk-2',
+    localStorageKey: 'moneta_predictions_accepted_risk-2',
   })
   const { account } = useWeb3React()
   const status = useGetPredictionsStatus()

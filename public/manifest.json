@@ -1,8 +1,8 @@
 {
   "short_name": "MonetaDex",
   "name": "MonetaDex",
-  "description": "Farm CAKE with Pancake LP Tokens",
-  "homepage_url": "https://pancakeswap.finance",
+  "description": "Exchange tokens, stake your coins and providy liquidity",
+  "homepage_url": "www.monetadex.com",
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#1FC7D4",

@@ -13,7 +13,7 @@ import GasSettings from './GasSettings'
 const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
   const [showConfirmExpertModal, setShowConfirmExpertModal] = useState(false)
   const [rememberExpertModeAcknowledgement, setRememberExpertModeAcknowledgement] = usePersistState(false, {
-    localStorageKey: 'pancake_expert_mode_remember_acknowledgement',
+    localStorageKey: 'moneta_expert_mode_remember_acknowledgement',
   })
   const [expertMode, toggleExpertMode] = useExpertModeManager()
   const [singleHopOnly, setSingleHopOnly] = useUserSingleHopOnly()
@@ -94,7 +94,7 @@ const SettingsModal: React.FC<InjectedModalProps> = ({ onDismiss }) => {
           <Flex alignItems="center">
             <Text>{t('Flippy sounds')}</Text>
             <QuestionHelper
-              text={t('Fun sounds to make a truly immersive pancake-flipping trading experience')}
+              text={t('Fun sounds to make a truly immersive trading experience')}
               placement="top-start"
               ml="4px"
             />
