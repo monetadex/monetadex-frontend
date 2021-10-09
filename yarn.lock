@@ -2725,17 +2725,6 @@
   resolved "https://registry.yarnpkg.com/@microsoft/fetch-event-source/-/fetch-event-source-2.0.1.tgz#9ceecc94b49fbaa15666e38ae8587f64acce007d"
   integrity sha512-W6CLUJ2eBMw3Rec70qrsEW0jOm/3twwJv21mrmj2yORiaVmVYGS4sSS5yUwvQc1ZlDLYGPnClVWmUUMagKNsfA==
 
-"@monetadex/uikit@C:/Users/rub_f/Desktop/monetadex-toolkit/packages/monetadex-uikit":
-  version "0.49.1"
-  dependencies:
-    "@popperjs/core" "^2.9.2"
-    "@types/lodash" "^4.14.168"
-    "@types/styled-system" "^5.1.10"
-    lodash "^4.17.20"
-    react-popper "^2.2.5"
-    react-transition-group "^4.4.1"
-    styled-system "^5.1.5"
-
 "@monetadex/uikit@file:../monetadex-toolkit/packages/monetadex-uikit":
   version "0.49.1"
   dependencies:
@@ -4397,9 +4386,9 @@
   integrity sha512-2yK7sLpKIT91TiS5sewHtOa7YuM8IuBXVl4GZv2jZFys4D2sY7K5vZh6MqD25TPA95Od+0YzCVq6cTF2IKrOmg==
 
 "@uniswap/token-lists@^1.0.0-beta.19":
-  version "1.0.0-beta.24"
-  resolved "https://registry.yarnpkg.com/@uniswap/token-lists/-/token-lists-1.0.0-beta.24.tgz#6809b80bee58e4a2f235cdedc07113652c85a741"
-  integrity sha512-9IMltV7ITwxnjuK0LYXlUZhYIB8wVAdwx5NAbGjHF9ss+zKL9FTyFfWTFif/EL6PCWvST+2B15ofUwSVZd17RA==
+  version "1.0.0-beta.26"
+  resolved "https://registry.yarnpkg.com/@uniswap/token-lists/-/token-lists-1.0.0-beta.26.tgz#6436e6bffda6a753f6412a48a7ce7548fa6a0f01"
+  integrity sha512-lDeB81CVds2ISqTbANyxgProFtoux4WRJFv9OoFV3NRnn10SYr0kVjgSOuBmbqa8gJorqomQYqOSGksIDQqthw==
 
 "@uniswap/v2-core@1.0.0":
   version "1.0.0"

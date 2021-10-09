@@ -4,8 +4,8 @@ import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { getDefaultListOfLists, getUnsupportedListUrls } from 'config/constants/lists'
 import { AppState } from '../index'
-import DEFAULT_TOKEN_LIST from '../../config/constants/tokenLists/pancake-default.tokenlist.json'
-import UNSUPPORTED_TOKEN_LIST from '../../config/constants/tokenLists/pancake-unsupported.tokenlist.json'
+import DEFAULT_TOKEN_LIST from '../../config/constants/tokenLists/monetadex-bsc-default.tokenlist.json'
+import UNSUPPORTED_TOKEN_LIST from '../../config/constants/tokenLists/monetadex-unsupported.tokenlist.json'
 
 type TagDetails = Tags[keyof Tags]
 export interface TagInfo extends TagDetails {
@@ -146,6 +146,8 @@ export function useInactiveListUrls(): string[] {
   const allActiveListUrls = useActiveListUrls()
   return Object.keys(lists).filter((url) => !allActiveListUrls?.includes(url) && !getUnsupportedListUrls().includes(url))
 }
+
+// TODO add support here for network
 
 // get all the tokens from active lists, combine with local default tokens
 export function useCombinedActiveList(): TokenAddressMap {
