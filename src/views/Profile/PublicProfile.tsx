@@ -82,7 +82,7 @@ const Section = styled.div`
 `
 
 const PublicProfile = () => {
-  const { account } = useWeb3React()
+  const { account, chainId } = useWeb3React()
   const { profile } = useProfile()
   const [usernameVisibilityToggled, setUsernameVisibility] = usePersistState(false, {
     localStorageKey: 'username_visibility_toggled',
@@ -115,7 +115,7 @@ const PublicProfile = () => {
                   <Icon ml="4px" onClick={toggleUsernameVisibility} cursor="pointer" />
                 </Flex>
                 <Flex alignItems="center">
-                  <AddressLink href={getBscScanLink(account, 'address')} color="text" external>
+                  <AddressLink href={getBscScanLink(account, 'address', chainId)} color="text" external>
                     {account}
                     <OpenNewIcon ml="4px" />
                   </AddressLink>

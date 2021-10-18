@@ -32,6 +32,7 @@ export interface Ifo {
   id: string
   isActive: boolean
   address: string
+  chainId: number
   name: string
   currency: Token
   token: Token
@@ -181,6 +182,7 @@ export interface LotteryTicketClaimData {
 // Farm Auction
 export interface FarmAuctionBidderConfig {
   account: string
+  chainId: number
   farmName: string
   tokenAddress: string
   quoteToken: Token

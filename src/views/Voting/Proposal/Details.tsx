@@ -40,13 +40,13 @@ const Details: React.FC<DetailsProps> = ({ proposal }) => {
         </Flex>
         <Flex alignItems="center" mb="8px">
           <Text color="textSubtle">{t('Creator')}</Text>
-          <LinkExternal href={getBscScanLink(proposal.author, 'address')} ml="8px">
+          <LinkExternal href={getBscScanLink(proposal.author, 'address', 56)} ml="8px">
             {truncateWalletAddress(proposal.author)}
           </LinkExternal>
         </Flex>
         <Flex alignItems="center" mb="16px">
           <Text color="textSubtle">{t('Snapshot')}</Text>
-          <LinkExternal href={getBscScanLink(proposal.snapshot, 'block')} ml="8px">
+          <LinkExternal href={getBscScanLink(proposal.snapshot, 'block', 56)} ml="8px">
             {proposal.snapshot}
           </LinkExternal>
         </Flex>

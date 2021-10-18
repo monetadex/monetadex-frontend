@@ -11,8 +11,12 @@ export const BSC_BLOCK_TIME = 3
 
 // TODO this needs to be replaced
 export const BASE_BSC_SCAN_URLS = {
-  [ChainId.MAINNET]: 'https://bscscan.com',
-  [ChainId.TESTNET]: 'https://testnet.bscscan.com',
+  [ChainId.BSC_MAINNET]: 'https://bscscan.com',
+  [ChainId.BSC_TESTNET]: 'https://testnet.bscscan.com',
+  [ChainId.ETHEREUM_MAINNET]: 'https://etherscan.io',
+  [ChainId.ETHEREUM_TESTNET]: 'https://rinkeby.etherscan.io/',
+  [ChainId.POLYGON_MAINNET]: 'https://polygonscan.com',
+  [ChainId.POLYGON_TESTNET]: 'https://mumbai.polygonscan.com',
 }
 
 // CAKE_PER_BLOCK details
@@ -25,10 +29,10 @@ export const BASE_BSC_SCAN_URLS = {
 export const CAKE_PER_BLOCK = new BigNumber(40)
 export const BLOCKS_PER_YEAR = new BigNumber((60 / BSC_BLOCK_TIME) * 60 * 24 * 365) // 10512000
 export const CAKE_PER_YEAR = CAKE_PER_BLOCK.times(BLOCKS_PER_YEAR)
+export const BASE_PICTURE_URL = 'https://tokens.1inch.io/'
 export const BASE_URL = 'www.monetadex.com'
 export const BASE_ADD_LIQUIDITY_URL = `${BASE_URL}/add`
 export const BASE_LIQUIDITY_POOL_URL = `${BASE_URL}/pool`
-export const BASE_BSC_SCAN_URL = BASE_BSC_SCAN_URLS[ChainId.MAINNET]
 export const DEFAULT_TOKEN_DECIMAL = BIG_TEN.pow(18)
 export const DEFAULT_GAS_LIMIT = 200000
 export const AUCTION_BIDDERS_TO_FETCH = 500

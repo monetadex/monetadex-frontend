@@ -15,15 +15,15 @@ const MANIFEST_APP_URL = "..."
 export const getConnectorsByNameAndNetwork = (connectorName: ConnectorNames, network: NetworkConfig) => {
   switch (connectorName) {
     case ConnectorNames.Injected:
-      return new InjectedConnector({ supportedChainIds: [parseInt(network.chainId, 10)] })
+      return new InjectedConnector({ supportedChainIds: [network.chainId] })
     case ConnectorNames.WalletConnect:
-      return new WalletConnectConnector({ rpc: { [parseInt(network.chainId, 10)]: sample(network.rpcUrl) }, qrcode: true, pollingInterval: POLLING_INTERVAL, })
+      return new WalletConnectConnector({ rpc: { [network.chainId]: sample(network.rpcUrl) }, qrcode: true, pollingInterval: POLLING_INTERVAL, })
     case ConnectorNames.BSC:
-      return new BscConnector({ supportedChainIds: [parseInt(network.chainId, 10)] })
+      return new BscConnector({ supportedChainIds: [network.chainId] })
     case ConnectorNames.Ledger:
-      return new LedgerConnector({ chainId: parseInt(network.chainId, 10), url: sample(network.rpcUrl), pollingInterval: POLLING_INTERVAL });
+      return new LedgerConnector({ chainId: network.chainId, url: sample(network.rpcUrl), pollingInterval: POLLING_INTERVAL });
     case ConnectorNames.Trezor:
-      return new TrezorConnector({ chainId: parseInt(network.chainId, 10), url: sample(network.rpcUrl), pollingInterval: POLLING_INTERVAL, manifestEmail: MANIFEST_EMAIL, manifestAppUrl: MANIFEST_APP_URL });
+      return new TrezorConnector({ chainId: network.chainId, url: sample(network.rpcUrl), pollingInterval: POLLING_INTERVAL, manifestEmail: MANIFEST_EMAIL, manifestAppUrl: MANIFEST_APP_URL });
     default:
       throw new Error(`Not Expected`)
   }

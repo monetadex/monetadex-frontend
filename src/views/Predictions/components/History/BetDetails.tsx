@@ -43,13 +43,13 @@ const BetDetails: React.FC<BetDetailsProps> = ({ bet, result }) => {
       </RoundResultHistory>
       <Flex alignItems="center" justifyContent="space-between" mb="8px">
         <Text>{t('Opening Block')}</Text>
-        <Link href={getBscScanLink(bet.round.lockBlock, 'block')} external>
+        <Link href={getBscScanLink(bet.round.lockBlock, 'block', 56)} external>
           {bet.round.lockBlock}
         </Link>
       </Flex>
       <Flex alignItems="center" justifyContent="space-between">
         <Text>{t('Closing Block')}</Text>
-        <Link href={getBscScanLink(bet.round.closeBlock, 'block')} external>
+        <Link href={getBscScanLink(bet.round.closeBlock, 'block', 56)} external>
           {bet.round.closeBlock}
         </Link>
       </Flex>

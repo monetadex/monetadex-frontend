@@ -67,7 +67,7 @@ const TooltipContent = ({ blockNumber, t }: { blockNumber: number; t: ContextApi
     <Text color="body" mb="10px" fontWeight="600">
       {t('Block %num%', { num: blockNumber })}
     </Text>
-    <Link external href={getBscScanLink(blockNumber, 'block')}>
+    <Link external href={getBscScanLink(blockNumber, 'block', 56)}>
       {t('View on BscScan')}
     </Link>
   </>

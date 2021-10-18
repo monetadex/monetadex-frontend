@@ -49,6 +49,9 @@ function CurrencySearch({
 
   const allTokens = useAllTokens()
 
+  console.log("here");
+  console.log(allTokens);
+
   // if they input an address, use it
   const searchToken = useToken(debouncedQuery)
   const searchTokenIsAdded = useIsUserAddedToken(searchToken)

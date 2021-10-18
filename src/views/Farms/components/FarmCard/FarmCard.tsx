@@ -118,7 +118,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, displayApr, removed, cakePric
         {showExpandableSection && (
           <DetailsSection
             removed={removed}
-            bscScanAddress={getBscScanLink(lpAddress, 'address')}
+            bscScanAddress={getBscScanLink(lpAddress, 'address', 56)}
             infoAddress={`https://pancakeswap.info/pool/${lpAddress}`}
             totalValueFormatted={totalValueFormatted}
             lpLabel={lpLabel}

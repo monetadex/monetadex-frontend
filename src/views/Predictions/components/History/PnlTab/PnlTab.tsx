@@ -102,7 +102,7 @@ const getPnlSummary = (bets: Bet[], currentEpoch: number): PnlSummary => {
 
 const PnlTab: React.FC<PnlTabProps> = ({ hasBetHistory, bets }) => {
   const { t } = useTranslation()
-  const { account } = useWeb3React()
+  const { account, chainId } = useWeb3React()
   const currentEpoch = useGetCurrentEpoch()
   const bnbBusdPrice = usePriceBnbBusd()
 
@@ -178,7 +178,7 @@ const PnlTab: React.FC<PnlTabProps> = ({ hasBetHistory, bets }) => {
         <SummaryRow type="entered" summary={summary} bnbBusdPrice={bnbBusdPrice} />
 
         <Flex justifyContent="center" mt="24px">
-          <Link href={`${getBscScanLink(account, 'address')}#internaltx`} mb="16px" external>
+          <Link href={`${getBscScanLink(account, 'address', chainId)}#internaltx`} mb="16px" external>
             <Button mt="8px" width="100%">
               {t('View Reclaimed & Won')}
               <OpenNewIcon color="white" ml="4px" />

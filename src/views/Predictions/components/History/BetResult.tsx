@@ -35,7 +35,7 @@ const Divider = styled.hr`
 const BetResult: React.FC<BetResultProps> = ({ bet, result }) => {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
-  const { account } = useWeb3React()
+  const { account, chainId } = useWeb3React()
   const { isRefundable } = useIsRefundable(bet.round.epoch)
   const bnbBusdPrice = usePriceBnbBusd()
   const canClaim = !bet.claimed && bet.position === bet.round.position
@@ -133,7 +133,7 @@ const BetResult: React.FC<BetResultProps> = ({ bet, result }) => {
         )}
         {bet.claimed && (
           <Flex justifyContent="center">
-            <LinkExternal href={getBscScanLink(bet.claimedHash, 'transaction')} mb="16px">
+            <LinkExternal href={getBscScanLink(bet.claimedHash, 'transaction', chainId)} mb="16px">
               {t('View on BscScan')}
             </LinkExternal>
           </Flex>

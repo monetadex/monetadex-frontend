@@ -16,6 +16,7 @@ import AutoAprCell from './Cells/AutoAprCell'
 interface PoolRowProps {
   pool: Pool
   account: string
+  chainId: number
   userDataLoaded: boolean
 }
 
@@ -25,7 +26,7 @@ const StyledRow = styled.div`
   cursor: pointer;
 `
 
-const PoolRow: React.FC<PoolRowProps> = ({ pool, account, userDataLoaded }) => {
+const PoolRow: React.FC<PoolRowProps> = ({ pool, account, chainId, userDataLoaded }) => {
   const { isXs, isSm, isMd, isLg, isXl, isXxl, isTablet, isDesktop } = useMatchBreakpoints()
   const isLargerScreen = isLg || isXl || isXxl
   const [expanded, setExpanded] = useState(false)
@@ -52,6 +53,7 @@ const PoolRow: React.FC<PoolRowProps> = ({ pool, account, userDataLoaded }) => {
       {shouldRenderActionPanel && (
         <ActionPanel
           account={account}
+          chainId={chainId}
           pool={pool}
           userDataLoaded={userDataLoaded}
           expanded={expanded}

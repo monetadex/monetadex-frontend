@@ -94,13 +94,13 @@ export default function Swap({ history }: RouteComponentProps) {
 
   const parsedAmounts = showWrap
     ? {
-        [Field.INPUT]: parsedAmount,
-        [Field.OUTPUT]: parsedAmount,
-      }
+      [Field.INPUT]: parsedAmount,
+      [Field.OUTPUT]: parsedAmount,
+    }
     : {
-        [Field.INPUT]: independentField === Field.INPUT ? parsedAmount : trade?.inputAmount,
-        [Field.OUTPUT]: independentField === Field.OUTPUT ? parsedAmount : trade?.outputAmount,
-      }
+      [Field.INPUT]: independentField === Field.INPUT ? parsedAmount : trade?.inputAmount,
+      [Field.OUTPUT]: independentField === Field.OUTPUT ? parsedAmount : trade?.outputAmount,
+    }
 
   const { onSwitchTokens, onCurrencySelection, onUserInput, onChangeRecipient } = useSwapActionHandlers()
   const isValid = !swapInputError
@@ -451,8 +451,8 @@ export default function Swap({ history }: RouteComponentProps) {
                   {priceImpactSeverity > 3 && !isExpertMode
                     ? t('Price Impact High')
                     : priceImpactSeverity > 2
-                    ? t('Swap Anyway')
-                    : t('Swap')}
+                      ? t('Swap Anyway')
+                      : t('Swap')}
                 </Button>
               </RowBetween>
             ) : (
@@ -479,8 +479,8 @@ export default function Swap({ history }: RouteComponentProps) {
                   (priceImpactSeverity > 3 && !isExpertMode
                     ? `Price Impact Too High`
                     : priceImpactSeverity > 2
-                    ? t('Swap Anyway')
-                    : t('Swap'))}
+                      ? t('Swap Anyway')
+                      : t('Swap'))}
               </Button>
             )}
             {showApproveFlow && (

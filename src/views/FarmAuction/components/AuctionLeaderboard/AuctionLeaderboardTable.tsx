@@ -46,7 +46,7 @@ interface LeaderboardRowProps {
 
 const LeaderboardRow: React.FC<LeaderboardRowProps> = ({ bidder, cakePriceBusd, isMobile }) => {
   const { t } = useTranslation()
-  const { isTopPosition, position, samePositionAsAbove, farmName, tokenName, amount, projectSite, lpAddress, account } =
+  const { isTopPosition, position, samePositionAsAbove, farmName, tokenName, amount, projectSite, lpAddress, account, chainId } =
     bidder
   return (
     <>
@@ -104,7 +104,7 @@ const LeaderboardRow: React.FC<LeaderboardRowProps> = ({ bidder, cakePriceBusd, 
             </SubMenuItem>
           )}
           {account && (
-            <SubMenuItem as={LinkExternal} href={getBscScanLink(account, 'address')} bold={false} color="text">
+            <SubMenuItem as={LinkExternal} href={getBscScanLink(account, 'address', chainId)} bold={false} color="text">
               {t('Bidder Address')}
             </SubMenuItem>
           )}

@@ -34,7 +34,7 @@ const Timer: React.FC<Props> = ({ publicIfoData }) => {
               })}
             </Text>
             <Link
-              href={getBscScanLink(startBlockNum, 'countdown')}
+              href={getBscScanLink(startBlockNum, 'countdown', 56)}
               target="blank"
               rel="noopener noreferrer"
               ml="8px"

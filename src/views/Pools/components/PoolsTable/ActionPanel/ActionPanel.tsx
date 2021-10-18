@@ -13,7 +13,7 @@ import {
   TimerIcon,
   useTooltip,
 } from '@monetadex/uikit'
-import { BASE_BSC_SCAN_URL } from 'config'
+import { BASE_BSC_SCAN_URLS } from 'config'
 import { getBscScanLink } from 'utils'
 import { useBlock } from 'state/block/hooks'
 import { useCakeVault } from 'state/pools/hooks'
@@ -95,6 +95,7 @@ type MediaBreakpoints = {
 
 interface ActionPanelProps {
   account: string
+  chainId: number
   pool: Pool
   userDataLoaded: boolean
   expanded: boolean
@@ -112,7 +113,7 @@ const InfoSection = styled(Box)`
   }
 `
 
-const ActionPanel: React.FC<ActionPanelProps> = ({ account, pool, userDataLoaded, expanded, breakpoints }) => {
+const ActionPanel: React.FC<ActionPanelProps> = ({ account, chainId, pool, userDataLoaded, expanded, breakpoints }) => {
   const {
     sousId,
     stakingToken,
@@ -199,7 +200,7 @@ const ActionPanel: React.FC<ActionPanelProps> = ({ account, pool, userDataLoaded
       <Flex mb="8px" justifyContent="space-between">
         <Text>{hasPoolStarted ? t('Ends in') : t('Starts in')}:</Text>
         <Flex>
-          <Link external href={getBscScanLink(hasPoolStarted ? endBlock : startBlock, 'countdown')}>
+          <Link external href={getBscScanLink(hasPoolStarted ? endBlock : startBlock, 'countdown', 56)}>
             <Balance fontSize="16px" value={blocksToDisplay} decimals={0} color="primary" />
             <Text ml="4px" color="primary" textTransform="lowercase">
               {t('Blocks')}
@@ -263,7 +264,7 @@ const ActionPanel: React.FC<ActionPanelProps> = ({ account, pool, userDataLoaded
         {poolContractAddress && (
           <Flex mb="8px" justifyContent={['flex-end', 'flex-end', 'flex-start']}>
             <LinkExternal
-              href={`${BASE_BSC_SCAN_URL}/address/${isAutoVault ? cakeVaultContractAddress : poolContractAddress}`}
+              href={`${BASE_BSC_SCAN_URLS[chainId]}/address/${isAutoVault ? cakeVaultContractAddress : poolContractAddress}`}
               bold={false}
             >
               {t('View Contract')}

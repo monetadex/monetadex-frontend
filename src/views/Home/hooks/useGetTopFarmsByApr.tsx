@@ -50,7 +50,7 @@ const useGetTopFarmsByApr = (isIntersecting: boolean) => {
           new BigNumber(farm.poolWeight),
           cakePriceBusd,
           totalLiquidity,
-          farm.lpAddresses[ChainId.MAINNET],
+          farm.lpAddresses[ChainId.BSC_MAINNET],
         )
         return { ...farm, apr: cakeRewardsApr, lpRewardsApr }
       })

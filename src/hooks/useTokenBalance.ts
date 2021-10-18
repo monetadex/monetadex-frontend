@@ -50,23 +50,6 @@ const useTokenBalance = (tokenAddress: string) => {
   return balanceState
 }
 
-export const useTotalSupply = () => {
-  const { slowRefresh } = useRefresh()
-  const [totalSupply, setTotalSupply] = useState<BigNumber>()
-
-  useEffect(() => {
-    async function fetchTotalSupply() {
-      const cakeContract = getCakeContract()
-      const supply = await cakeContract.totalSupply()
-      setTotalSupply(new BigNumber(supply.toString()))
-    }
-
-    fetchTotalSupply()
-  }, [slowRefresh])
-
-  return totalSupply
-}
-
 export const useBurnedBalance = (tokenAddress: string) => {
   const [balance, setBalance] = useState(BIG_ZERO)
   const { slowRefresh } = useRefresh()

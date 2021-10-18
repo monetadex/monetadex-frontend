@@ -23,7 +23,7 @@ const VoteRow: React.FC<VoteRowProps> = ({ vote, isVoter }) => {
     <Row>
       <AddressColumn>
         <Flex alignItems="center">
-          <LinkExternal href={getBscScanLink(vote.voter, 'address')}>{truncateWalletAddress(vote.voter)}</LinkExternal>
+          <LinkExternal href={getBscScanLink(vote.voter, 'address', 56)}>{truncateWalletAddress(vote.voter)}</LinkExternal>
           {isVoter && (
             <Tag variant="success" outline ml="8px">
               <CheckmarkCircleIcon mr="4px" /> {t('Voted')}

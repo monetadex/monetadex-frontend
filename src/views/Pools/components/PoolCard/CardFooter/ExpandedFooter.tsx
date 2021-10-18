@@ -16,7 +16,7 @@ import {
   Link,
   HelpIcon,
 } from '@monetadex/uikit'
-import { BASE_BSC_SCAN_URL } from 'config'
+import { BASE_BSC_SCAN_URLS } from 'config'
 import { useBlock } from 'state/block/hooks'
 import { useCakeVault } from 'state/pools/hooks'
 import { Pool } from 'state/types'
@@ -29,6 +29,7 @@ import { getPoolBlockInfo } from 'views/Pools/helpers'
 interface ExpandedFooterProps {
   pool: Pool
   account: string
+  chainId: number
 }
 
 const ExpandedWrapper = styled(Flex)`
@@ -38,7 +39,7 @@ const ExpandedWrapper = styled(Flex)`
   }
 `
 
-const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account }) => {
+const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account, chainId }) => {
   const { t } = useTranslation()
   const { currentBlock } = useBlock()
   const {
@@ -120,7 +121,7 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account }) => {
           <Text small>{hasPoolStarted ? t('Ends in') : t('Starts in')}:</Text>
           {blocksRemaining || blocksUntilStart ? (
             <Flex alignItems="center">
-              <Link external href={getBscScanLink(hasPoolStarted ? endBlock : startBlock, 'countdown')}>
+              <Link external href={getBscScanLink(hasPoolStarted ? endBlock : startBlock, 'countdown', 56)}>
                 <Balance small value={blocksToDisplay} decimals={0} color="primary" />
                 <Text small ml="4px" color="primary" textTransform="lowercase">
                   {t('Blocks')}
@@ -159,7 +160,7 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account }) => {
       {poolContractAddress && (
         <Flex mb="2px" justifyContent="flex-end">
           <LinkExternal
-            href={`${BASE_BSC_SCAN_URL}/address/${isAutoVault ? cakeVaultContractAddress : poolContractAddress}`}
+            href={`${BASE_BSC_SCAN_URLS[chainId]}/address/${isAutoVault ? cakeVaultContractAddress : poolContractAddress}`}
             bold={false}
             small
           >

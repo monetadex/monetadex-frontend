@@ -53,7 +53,7 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
   onSuccess,
 }) => {
   const [isPendingTx, setIsPendingTx] = useState(false)
-  const { account } = useWeb3React()
+  const { account, chainId } = useWeb3React()
   const { t } = useTranslation()
   const { toastSuccess, toastError } = useToast()
   const { callWithGasPrice } = useCallWithGasPrice()
@@ -85,7 +85,7 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
             {t('Your prizes have been sent to your wallet')}
           </Text>
           {receipt.transactionHash && (
-            <LinkExternal href={getBscScanLink(receipt.transactionHash, 'transaction')}>
+            <LinkExternal href={getBscScanLink(receipt.transactionHash, 'transaction', chainId)}>
               {t('View on BscScan')}
             </LinkExternal>
           )}

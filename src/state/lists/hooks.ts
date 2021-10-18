@@ -4,7 +4,9 @@ import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { getDefaultListOfLists, getUnsupportedListUrls } from 'config/constants/lists'
 import { AppState } from '../index'
-import DEFAULT_TOKEN_LIST from '../../config/constants/tokenLists/monetadex-bsc-default.tokenlist.json'
+import BSC_DEFAULT_TOKEN_LIST from '../../config/constants/tokenLists/monetadex-bsc-default.tokenlist.json'
+import ETHEREUM_DEFAULT_TOKEN_LIST from '../../config/constants/tokenLists/monetadex-ethereum-default.tokenlist.json'
+import POLIGON_DEFAULT_TOKEN_LIST from '../../config/constants/tokenLists/monetadex-polygon-default.tokenlist.json'
 import UNSUPPORTED_TOKEN_LIST from '../../config/constants/tokenLists/monetadex-unsupported.tokenlist.json'
 
 type TagDetails = Tags[keyof Tags]
@@ -50,8 +52,12 @@ export type TokenAddressMap = Readonly<
  * An empty result, useful as a default.
  */
 const EMPTY_LIST: TokenAddressMap = {
-  [ChainId.MAINNET]: {},
-  [ChainId.TESTNET]: {},
+  [ChainId.BSC_MAINNET]: {},
+  [ChainId.BSC_TESTNET]: {},
+  [ChainId.ETHEREUM_MAINNET]: {},
+  [ChainId.ETHEREUM_TESTNET]: {},
+  [ChainId.POLYGON_MAINNET]: {},
+  [ChainId.POLYGON_TESTNET]: {}
 }
 
 const listCache: WeakMap<TokenList, TokenAddressMap> | null =
@@ -102,8 +108,12 @@ export function useAllLists(): {
 
 function combineMaps(map1: TokenAddressMap, map2: TokenAddressMap): TokenAddressMap {
   return {
-    [ChainId.MAINNET]: { ...map1[ChainId.MAINNET], ...map2[ChainId.MAINNET] },
-    [ChainId.TESTNET]: { ...map1[ChainId.TESTNET], ...map2[ChainId.TESTNET] },
+    [ChainId.BSC_MAINNET]: { ...map1[ChainId.BSC_MAINNET], ...map2[ChainId.BSC_MAINNET] },
+    [ChainId.BSC_TESTNET]: { ...map1[ChainId.BSC_TESTNET], ...map2[ChainId.BSC_TESTNET] },
+    [ChainId.ETHEREUM_MAINNET]: { ...map1[ChainId.ETHEREUM_MAINNET], ...map2[ChainId.ETHEREUM_MAINNET] },
+    [ChainId.ETHEREUM_TESTNET]: { ...map1[ChainId.ETHEREUM_TESTNET], ...map2[ChainId.ETHEREUM_TESTNET] },
+    [ChainId.POLYGON_MAINNET]: { ...map1[ChainId.POLYGON_MAINNET], ...map2[ChainId.POLYGON_MAINNET] },
+    [ChainId.POLYGON_TESTNET]: { ...map1[ChainId.POLYGON_TESTNET], ...map2[ChainId.POLYGON_TESTNET] },
   }
 }
 
@@ -153,7 +163,9 @@ export function useInactiveListUrls(): string[] {
 export function useCombinedActiveList(): TokenAddressMap {
   const activeListUrls = useActiveListUrls()
   const activeTokens = useCombinedTokenMapFromUrls(activeListUrls)
-  const defaultTokenMap = listToTokenMap(DEFAULT_TOKEN_LIST)
+  const defaultTokenMap = listToTokenMap(POLIGON_DEFAULT_TOKEN_LIST)
+  console.log("defaultTokenMap")
+  console.log(defaultTokenMap)
   return combineMaps(activeTokens, defaultTokenMap)
 }
 
@@ -165,7 +177,7 @@ export function useCombinedInactiveList(): TokenAddressMap {
 
 // used to hide warnings on import for default tokens
 export function useDefaultTokenList(): TokenAddressMap {
-  return listToTokenMap(DEFAULT_TOKEN_LIST)
+  return listToTokenMap(BSC_DEFAULT_TOKEN_LIST)
 }
 
 // list of tokens not supported on interface, used to show warnings and prevent swaps and adds

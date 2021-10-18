@@ -27,7 +27,7 @@ interface CakeVaultProps {
 
 const CakeVaultCard: React.FC<CakeVaultProps> = ({ pool, showStakedOnly }) => {
   const { t } = useTranslation()
-  const { account } = useWeb3React()
+  const { account, chainId } = useWeb3React()
   const {
     userData: { userShares, isLoading: isVaultUserDataLoading },
     fees: { performanceFee },
@@ -78,7 +78,7 @@ const CakeVaultCard: React.FC<CakeVaultProps> = ({ pool, showStakedOnly }) => {
           )}
         </Flex>
       </StyledCardBody>
-      <CardFooter pool={pool} account={account} />
+      <CardFooter pool={pool} account={account} chainId={chainId} />
     </StyledCard>
   )
 }

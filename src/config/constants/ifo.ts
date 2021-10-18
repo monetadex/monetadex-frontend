@@ -12,6 +12,7 @@ const ifos: Ifo[] = [
   {
     id: 'kalmar',
     address: '0x1aFB32b76696CdF05593Ca3f3957AEFB23a220FB',
+    chainId: 56,
     isActive: true,
     name: 'Kalmar (KALM)',
     poolBasic: {
@@ -37,6 +38,7 @@ const ifos: Ifo[] = [
   {
     id: 'hotcross',
     address: '0xb664cdbe385656F8c54031c0CB12Cea55b584b63',
+    chainId: 56,
     isActive: false,
     name: 'Hot Cross (HOTCROSS)',
     poolBasic: {
@@ -62,6 +64,7 @@ const ifos: Ifo[] = [
   {
     id: 'horizon',
     address: '0x6137B571f7F1E44839ae10310a08be86D1A4D03B',
+    chainId: 56,
     isActive: false,
     name: 'Horizon Protocol (HZN)',
     poolBasic: {
@@ -87,6 +90,7 @@ const ifos: Ifo[] = [
   {
     id: 'belt',
     address: '0xc9FBedC033a1c479a6AD451ffE463025E92a1d38',
+    chainId: 56,
     isActive: false,
     name: 'Belt (BELT)',
     poolUnlimited: {
@@ -106,6 +110,7 @@ const ifos: Ifo[] = [
   {
     id: 'watch',
     address: '0x55344b55C71Ad8834C397E6e08dF5195cF84fe6d',
+    chainId: 56,
     isActive: false,
     name: 'Yieldwatch (WATCH)',
     poolUnlimited: {
@@ -125,6 +130,7 @@ const ifos: Ifo[] = [
   {
     id: 'berry',
     address: '0x5d028cE3435B2bB9AceBfaC599EEbA1ccD63d7dd',
+    chainId: 56,
     isActive: false,
     name: 'Berry (BRY)',
     poolUnlimited: {
@@ -144,6 +150,7 @@ const ifos: Ifo[] = [
   {
     id: 'soteria',
     address: '0x9C21123D94b93361a29B2C2EFB3d5CD8B17e0A9e',
+    chainId: 56,
     isActive: false,
     name: 'Soteria (wSOTE)',
     poolUnlimited: {
@@ -163,6 +170,7 @@ const ifos: Ifo[] = [
   {
     id: 'helmet',
     address: '0xa32509d760ee47Eb2Be96D338b5d69B5FBa4eFEB',
+    chainId: 56,
     isActive: false,
     name: 'Helmet.insure (Helmet)',
     poolUnlimited: {
@@ -182,6 +190,7 @@ const ifos: Ifo[] = [
   {
     id: 'tenet',
     address: '0xB922aA19A2603A07C6C9ED6c236618C9bac51f06',
+    chainId: 56,
     isActive: false,
     name: 'Tenet (TEN)',
     poolUnlimited: {
@@ -201,6 +210,7 @@ const ifos: Ifo[] = [
   {
     id: 'ditto',
     address: '0x570c9eB19553526Fb35895a531928E19C7D20788',
+    chainId: 56,
     isActive: false,
     name: 'Ditto (DITTO)',
     poolUnlimited: {
@@ -220,6 +230,7 @@ const ifos: Ifo[] = [
   {
     id: 'blink',
     address: '0x44a9Cc8463EC00937242b660BF65B10365d99baD',
+    chainId: 56,
     isActive: false,
     name: 'BLINk (BLK)',
     poolUnlimited: {

@@ -21,7 +21,13 @@ import { filterTokens } from '../components/SearchModal/filtering'
 
 // reduce token map into standard address <-> Token mapping, optionally include user added tokens
 function useTokensFromMap(tokenMap: TokenAddressMap, includeUserAdded: boolean): { [address: string]: Token } {
+  console.log("useTokensFromMap")
+
+
   const { chainId } = useActiveWeb3React()
+
+  console.log(chainId)
+
   const userAddedTokens = useUserAddedTokens()
 
   return useMemo(() => {
@@ -60,6 +66,8 @@ export function useDefaultTokens(): { [address: string]: Token } {
 
 export function useAllTokens(): { [address: string]: Token } {
   const allTokens = useCombinedActiveList()
+  console.log("allTokens")
+  console.log(allTokens)
   return useTokensFromMap(allTokens, true)
 }
 

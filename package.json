@@ -35,7 +35,7 @@
     "@binance-chain/bsc-connector": "^1.0.0",
     "@ethersproject/experimental": "^5.0.1",
     "@monetadex/uikit": "C:/Users/rub_f/Desktop/monetadex-toolkit/packages/monetadex-uikit",
-    "@pancakeswap/sdk": "^2.3.2",
+    "@pancakeswap/sdk": "C:/Users/rub_f/Desktop/monetadex-swap-sdk",
     "@reduxjs/toolkit": "^1.5.0",
     "@types/multicodec": "^1.0.0",
     "@types/node": "^13.13.5",
