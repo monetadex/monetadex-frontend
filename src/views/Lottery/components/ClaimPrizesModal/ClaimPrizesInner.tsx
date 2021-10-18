@@ -8,7 +8,6 @@ import { callWithEstimateGas } from 'utils/calls'
 import { usePriceCakeBusd } from 'state/farms/hooks'
 import { useLottery } from 'state/lottery/hooks'
 import { fetchUserLotteries } from 'state/lottery'
-import { useGasPrice } from 'state/user/hooks'
 import { useAppDispatch } from 'state'
 import Balance from 'components/Balance'
 import useToast from 'hooks/useToast'
@@ -24,7 +23,7 @@ const ClaimInnerContainer: React.FC<ClaimInnerProps> = ({ onSuccess, roundsToCla
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const { maxNumberTicketsPerBuyOrClaim, currentLotteryId } = useLottery()
-  const gasPrice = useGasPrice()
+  const gasPrice = 0
   const { toastSuccess, toastError } = useToast()
   const [activeClaimIndex, setActiveClaimIndex] = useState(0)
   const [pendingTx, setPendingTx] = useState(false)

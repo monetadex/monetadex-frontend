@@ -35,7 +35,7 @@ import Dots from '../../components/Loader/Dots'
 import { useBurnActionHandlers, useDerivedBurnInfo, useBurnState } from '../../state/burn/hooks'
 
 import { Field } from '../../state/burn/actions'
-import { useGasPrice, useUserSlippageTolerance } from '../../state/user/hooks'
+import { useUserSlippageTolerance } from '../../state/user/hooks'
 import Page from '../Page'
 
 const BorderCard = styled.div`
@@ -58,7 +58,7 @@ export default function RemoveLiquidity({
   )
 
   const { t } = useTranslation()
-  const gasPrice = useGasPrice()
+  const gasPrice = 0
 
   // burn state
   const { independentField, typedValue } = useBurnState()
