@@ -62,7 +62,7 @@ export default function ImportRow({
 
   // check if already active on list or local storage tokens
   const isAdded = useIsUserAddedToken(token)
-  const isActive = useIsTokenActive(token)
+  const isActive = useIsTokenActive(token, chainId)
 
   return (
     <TokenSection style={style}>

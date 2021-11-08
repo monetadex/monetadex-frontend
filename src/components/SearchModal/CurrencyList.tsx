@@ -41,7 +41,7 @@ function Balance({ balance }: { balance: CurrencyAmount }) {
   return <StyledBalanceText title={balance.toExact()}>{balance.toSignificant(4)}</StyledBalanceText>
 }
 
-const MenuItem = styled(RowBetween)<{ disabled: boolean; selected: boolean }>`
+const MenuItem = styled(RowBetween) <{ disabled: boolean; selected: boolean }>`
   padding: 4px 20px;
   height: 56px;
   display: grid;
@@ -56,12 +56,14 @@ const MenuItem = styled(RowBetween)<{ disabled: boolean; selected: boolean }>`
 `
 
 function CurrencyRow({
+  chainId,
   currency,
   onSelect,
   isSelected,
   otherSelected,
   style,
 }: {
+  chainId: number
   currency: Currency
   onSelect: () => void
   isSelected: boolean
@@ -70,7 +72,7 @@ function CurrencyRow({
 }) {
   const { account } = useActiveWeb3React()
   const key = currencyKey(currency)
-  const selectedTokenList = useCombinedActiveList()
+  const selectedTokenList = useCombinedActiveList(chainId)
   const isOnSelectedList = isTokenOnList(selectedTokenList, currency)
   const customAdded = useIsUserAddedToken(currency)
   const balance = useCurrencyBalance(account ?? undefined, currency)
@@ -135,7 +137,7 @@ export default function CurrencyList({
 
   const inactiveTokens: {
     [address: string]: Token
-  } = useAllInactiveTokens()
+  } = useAllInactiveTokens(chainId)
 
   const Row = useCallback(
     ({ data, index, style }) => {
@@ -173,6 +175,7 @@ export default function CurrencyList({
       }
       return (
         <CurrencyRow
+          chainId={chainId}
           style={style}
           currency={currency}
           isSelected={isSelected}

@@ -50,6 +50,8 @@ const Label = styled(Text)`
 `
 
 export default function Swap({ history }: RouteComponentProps) {
+  const { account, chainId } = useActiveWeb3React()
+
   const loadedUrlParams = useDefaultsFromURLSearch()
 
   const { t } = useTranslation()
@@ -65,14 +67,12 @@ export default function Swap({ history }: RouteComponentProps) {
   )
 
   // dismiss warning if all imported tokens are in active lists
-  const defaultTokens = useAllTokens()
+  const defaultTokens = useAllTokens(chainId)
   const importTokensNotInDefault =
     urlLoadedTokens &&
     urlLoadedTokens.filter((token: Token) => {
       return !(token.address in defaultTokens)
     })
-
-  const { account } = useActiveWeb3React()
 
   // for expert mode
   const [isExpertMode] = useExpertModeManager()

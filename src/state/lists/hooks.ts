@@ -60,48 +60,40 @@ const EMPTY_LIST: TokenAddressMap = {
   [ChainId.POLYGON_TESTNET]: {}
 }
 
-const listCache: WeakMap<Array<TokenList>, TokenAddressMap> | null =
-  typeof WeakMap !== 'undefined' ? new WeakMap<TokenList[], TokenAddressMap>() : null
+const listCache: WeakMap<TokenList, TokenAddressMap> | null =
+  typeof WeakMap !== 'undefined' ? new WeakMap<TokenList, TokenAddressMap>() : null
 
-export function listToTokenMap(lists: TokenList[]): TokenAddressMap {
-  console.log("listToTokenMap")
-  console.log(listCache)
-  console.log(lists)
-  const result = listCache?.get(lists)
+export function listToTokenMap(list: TokenList): TokenAddressMap {
+  const result = listCache?.get(list)
   if (result) return result
 
-  const map = lists.reduce<TokenAddressMap>(
-    (previousList, currentList) => {
-      return currentList.tokens.reduce<TokenAddressMap>(
-        (tokenMap, tokenInfo) => {
-          const tags: TagInfo[] =
-            tokenInfo.tags
-              ?.map((tagId) => {
-                if (!currentList.tags?.[tagId]) return undefined
-                return { ...currentList.tags[tagId], id: tagId }
-              })
-              ?.filter((x): x is TagInfo => Boolean(x)) ?? []
-          const token = new WrappedTokenInfo(tokenInfo, tags)
-          if (tokenMap[token.chainId][token.address] !== undefined) throw Error('Duplicate tokens.')
-          return {
-            ...tokenMap,
-            [token.chainId]: {
-              ...tokenMap[token.chainId],
-              [token.address]: {
-                token,
-                currentList,
-              },
-            },
-          }
+  const map = list.tokens.reduce<TokenAddressMap>(
+    (tokenMap, tokenInfo) => {
+      const tags: TagInfo[] =
+        tokenInfo.tags
+          ?.map((tagId) => {
+            if (!list.tags?.[tagId]) return undefined
+            return { ...list.tags[tagId], id: tagId }
+          })
+          ?.filter((x): x is TagInfo => Boolean(x)) ?? []
+      const token = new WrappedTokenInfo(tokenInfo, tags)
+      if (tokenMap[token.chainId][token.address] !== undefined) throw Error('Duplicate tokens.')
+      return {
+        ...tokenMap,
+        [token.chainId]: {
+          ...tokenMap[token.chainId],
+          [token.address]: {
+            token,
+            list,
+          },
         },
-        { ...previousList },
-      )
+      }
     },
-    { ...EMPTY_LIST },
+    { ...EMPTY_LIST }
   )
 
 
-  listCache?.set(lists, map)
+  listCache?.set(list, map)
   return map
 }
 
@@ -144,7 +136,7 @@ function useCombinedTokenMapFromUrls(urls: string[] | undefined): TokenAddressMa
           if (!current) return allTokens
           try {
             // TODO this needs to be fexed
-            const newTokens = Object.assign(listToTokenMap([current]))
+            const newTokens = Object.assign(listToTokenMap(current))
             return combineMaps(allTokens, newTokens)
           } catch (error) {
             console.error('Could not show token list due to error', error)
@@ -168,10 +160,10 @@ export function useInactiveListUrls(): string[] {
   return Object.keys(lists).filter((url) => !allActiveListUrls?.includes(url) && !getUnsupportedListUrls().includes(url))
 }
 
-export function useCombinedActiveList(): TokenAddressMap {
+export function useCombinedActiveList(chainId: number): TokenAddressMap {
   const activeListUrls = useActiveListUrls()
   const activeTokens = useCombinedTokenMapFromUrls(activeListUrls)
-  const defaultTokenMap = listToTokenMap([ETHEREUM_DEFAULT_TOKEN_LIST, BSC_DEFAULT_TOKEN_LIST, POLIGON_DEFAULT_TOKEN_LIST])
+  const defaultTokenMap = listToTokenMap(getDefaultTokenList(chainId))
   console.log("defaultTokenMap")
   console.log(defaultTokenMap)
   return combineMaps(activeTokens, defaultTokenMap)
@@ -184,14 +176,30 @@ export function useCombinedInactiveList(): TokenAddressMap {
 }
 
 // used to hide warnings on import for default tokens
-export function useDefaultTokenList(): TokenAddressMap {
-  return listToTokenMap([ETHEREUM_DEFAULT_TOKEN_LIST, BSC_DEFAULT_TOKEN_LIST, POLIGON_DEFAULT_TOKEN_LIST])
+export function useDefaultTokenList(chainId: number): TokenAddressMap {
+  return listToTokenMap(getDefaultTokenList(chainId))
+}
+
+export function getDefaultTokenList(chainId: number) {
+  switch (chainId) {
+    case ChainId.BSC_MAINNET:
+    case ChainId.BSC_TESTNET:
+      return BSC_DEFAULT_TOKEN_LIST;
+    case ChainId.ETHEREUM_MAINNET:
+    case ChainId.ETHEREUM_TESTNET:
+      return ETHEREUM_DEFAULT_TOKEN_LIST;
+    case ChainId.POLYGON_MAINNET:
+    case ChainId.POLYGON_TESTNET:
+      return POLIGON_DEFAULT_TOKEN_LIST;
+    default:
+      throw new Error('Network not implemented')
+  }
 }
 
 // list of tokens not supported on interface, used to show warnings and prevent swaps and adds
 export function useUnsupportedTokenList(): TokenAddressMap {
   // get hard coded unsupported tokens
-  const localUnsupportedListMap = listToTokenMap([UNSUPPORTED_TOKEN_LIST])
+  const localUnsupportedListMap = listToTokenMap(UNSUPPORTED_TOKEN_LIST)
 
   // get any loaded unsupported tokens
   const loadedUnsupportedListMap = useCombinedTokenMapFromUrls(getUnsupportedListUrls())

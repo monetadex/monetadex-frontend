@@ -54,23 +54,23 @@ function useTokensFromMap(tokenMap: TokenAddressMap, includeUserAdded: boolean):
   }, [chainId, userAddedTokens, tokenMap, includeUserAdded])
 }
 
-export function useDefaultTokens(): { [address: string]: Token } {
-  const defaultList = useDefaultTokenList()
+export function useDefaultTokens(chainId: number): { [address: string]: Token } {
+  const defaultList = useDefaultTokenList(chainId)
   return useTokensFromMap(defaultList, false)
 }
 
-export function useAllTokens(): { [address: string]: Token } {
-  const allTokens = useCombinedActiveList()
+export function useAllTokens(chainId: number): { [address: string]: Token } {
+  const allTokens = useCombinedActiveList(chainId)
   return useTokensFromMap(allTokens, true)
 }
 
-export function useAllInactiveTokens(): { [address: string]: Token } {
+export function useAllInactiveTokens(chainId: number): { [address: string]: Token } {
   // get inactive tokens
   const inactiveTokensMap = useCombinedInactiveList()
   const inactiveTokens = useTokensFromMap(inactiveTokensMap, false)
 
   // filter out any token that are on active list
-  const activeTokensAddresses = Object.keys(useAllTokens())
+  const activeTokensAddresses = Object.keys(useAllTokens(chainId))
   const filteredInactive = activeTokensAddresses
     ? Object.keys(inactiveTokens).reduce<{ [address: string]: Token }>((newMap, address) => {
         if (!activeTokensAddresses.includes(address)) {
@@ -88,8 +88,8 @@ export function useUnsupportedTokens(): { [address: string]: Token } {
   return useTokensFromMap(unsupportedTokensMap, false)
 }
 
-export function useIsTokenActive(token: Token | undefined | null): boolean {
-  const activeTokens = useAllTokens()
+export function useIsTokenActive(token: Token | undefined | null, chainId: number): boolean {
+  const activeTokens = useAllTokens(chainId)
 
   if (!activeTokens || !token) {
     return false
@@ -101,7 +101,7 @@ export function useIsTokenActive(token: Token | undefined | null): boolean {
 // used to detect extra search results
 export function useFoundOnInactiveList(searchQuery: string): Token[] | undefined {
   const { chainId } = useActiveWeb3React()
-  const inactiveTokens = useAllInactiveTokens()
+  const inactiveTokens = useAllInactiveTokens(chainId)
 
   return useMemo(() => {
     if (!chainId || searchQuery === '') {
@@ -140,7 +140,7 @@ function parseStringOrBytes32(str: string | undefined, bytes32: string | undefin
 // otherwise returns the token
 export function useToken(tokenAddress?: string): Token | undefined | null {
   const { chainId } = useActiveWeb3React()
-  const tokens = useAllTokens()
+  const tokens = useAllTokens(chainId)
 
   const address = isAddress(tokenAddress)
 

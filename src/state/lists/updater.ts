@@ -13,7 +13,7 @@ import { acceptListUpdate } from './actions'
 import { useActiveListUrls } from './hooks'
 
 export default function Updater(): null {
-  const { library } = useWeb3Provider()
+  const { library, chainId } = useWeb3Provider()
 
   const dispatch = useDispatch<AppDispatch>()
   const isWindowVisible = useIsWindowVisible()
@@ -24,7 +24,7 @@ export default function Updater(): null {
   const activeListUrls = useActiveListUrls()
 
   // initiate loading
-  useAllInactiveTokens()
+  useAllInactiveTokens(chainId)
 
   const fetchList = useFetchListCallback()
   const fetchAllListsCallback = useCallback(() => {
