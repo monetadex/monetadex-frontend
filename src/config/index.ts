@@ -10,7 +10,7 @@ BigNumber.config({
 export const BSC_BLOCK_TIME = 3
 
 // TODO this needs to be replaced
-export const BASE_BSC_SCAN_URLS = {
+export const BASE_SCAN_URLS = {
   [ChainId.BSC_MAINNET]: 'https://bscscan.com',
   [ChainId.BSC_TESTNET]: 'https://testnet.bscscan.com',
   [ChainId.ETHEREUM_MAINNET]: 'https://etherscan.io',

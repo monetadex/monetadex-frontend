@@ -13,7 +13,7 @@ import {
   TimerIcon,
   useTooltip,
 } from '@monetadex/uikit'
-import { BASE_BSC_SCAN_URLS } from 'config'
+import { BASE_SCAN_URLS } from 'config'
 import { getBscScanLink } from 'utils'
 import { useBlock } from 'state/block/hooks'
 import { useCakeVault } from 'state/pools/hooks'
@@ -264,7 +264,7 @@ const ActionPanel: React.FC<ActionPanelProps> = ({ account, chainId, pool, userD
         {poolContractAddress && (
           <Flex mb="8px" justifyContent={['flex-end', 'flex-end', 'flex-start']}>
             <LinkExternal
-              href={`${BASE_BSC_SCAN_URLS[chainId]}/address/${isAutoVault ? cakeVaultContractAddress : poolContractAddress}`}
+              href={`${BASE_SCAN_URLS[chainId]}/address/${isAutoVault ? cakeVaultContractAddress : poolContractAddress}`}
               bold={false}
             >
               {t('View Contract')}

@@ -16,7 +16,7 @@ import {
   Link,
   HelpIcon,
 } from '@monetadex/uikit'
-import { BASE_BSC_SCAN_URLS } from 'config'
+import { BASE_SCAN_URLS } from 'config'
 import { useBlock } from 'state/block/hooks'
 import { useCakeVault } from 'state/pools/hooks'
 import { Pool } from 'state/types'
@@ -160,7 +160,7 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account, chainId 
       {poolContractAddress && (
         <Flex mb="2px" justifyContent="flex-end">
           <LinkExternal
-            href={`${BASE_BSC_SCAN_URLS[chainId]}/address/${isAutoVault ? cakeVaultContractAddress : poolContractAddress}`}
+            href={`${BASE_SCAN_URLS[chainId]}/address/${isAutoVault ? cakeVaultContractAddress : poolContractAddress}`}
             bold={false}
             small
           >

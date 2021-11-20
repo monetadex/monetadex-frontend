@@ -164,8 +164,6 @@ export function useCombinedActiveList(chainId: number): TokenAddressMap {
   const activeListUrls = useActiveListUrls()
   const activeTokens = useCombinedTokenMapFromUrls(activeListUrls)
   const defaultTokenMap = listToTokenMap(getDefaultTokenList(chainId))
-  console.log("defaultTokenMap")
-  console.log(defaultTokenMap)
   return combineMaps(activeTokens, defaultTokenMap)
 }
 

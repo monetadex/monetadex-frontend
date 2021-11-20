@@ -1,11 +1,11 @@
 // Set of helper functions to facilitate wallet setup
 
-import { BASE_BSC_SCAN_URLS, BASE_PICTURE_URL } from 'config'
+import { BASE_SCAN_URLS, BASE_PICTURE_URL } from 'config'
 import getNetwork from './getNetwork'
 import { getNodes } from './getRpcUrl'
 
 /**
- * Prompt the user to add BSC as a network on Metamask, or switch to BSC if the wallet is on a different network
+ * Prompt the user to add a network on Metamask
  * @returns {boolean} true if the setup succeeded, false otherwise
  */
 export const setupNetwork = async () => {
@@ -20,7 +20,7 @@ export const setupNetwork = async () => {
             chainId: `0x${network.chainId.toString(16)}`,
             chainName: network.name,
             rpcUrls: getNodes(),
-            blockExplorerUrls: [`${BASE_BSC_SCAN_URLS[network.chainId]}/`],
+            blockExplorerUrls: [`${BASE_SCAN_URLS[network.chainId]}/`],
           },
         ],
       })
@@ -54,6 +54,22 @@ export const registerToken = async (tokenAddress: string, tokenSymbol: string, t
         image: `${BASE_PICTURE_URL}${tokenAddress}.png`,
       },
     },
+  })
+
+  return tokenAdded
+}
+
+/**
+ * Prompt the user to switch to the selected chain
+ * @param chainId
+ * @returns {boolean} true if the setup succeeded, false otherwise
+ */
+export const switchNetwork = async (chainId: number) => {
+  const tokenAdded = await window.ethereum.request({
+    method: 'wallet_switchEthereumChain',
+    params: [
+      { chainId: `0x${chainId}` }
+    ],
   })
 
   return tokenAdded
