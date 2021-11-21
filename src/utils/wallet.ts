@@ -65,12 +65,17 @@ export const registerToken = async (tokenAddress: string, tokenSymbol: string, t
  * @returns {boolean} true if the setup succeeded, false otherwise
  */
 export const switchNetwork = async (chainId: number) => {
-  const tokenAdded = await window.ethereum.request({
-    method: 'wallet_switchEthereumChain',
-    params: [
-      { chainId: `0x${chainId}` }
-    ],
-  })
+  try {
+    await window.ethereum.request({
+      method: 'wallet_switchEthereumChain',
+      params: [
+        { chainId: `0x${chainId.toString(16)}` }
+      ],
+    })
 
-  return tokenAdded
+    return true
+  } catch (error) {
+    console.error('Failed to switch the network in Metamask:', error)
+    return false
+  }
 }
